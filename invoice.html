@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Forex Academy - Invoice</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h2>Invoice</h2>
+
+        <div id="invoice-details">
+            <!-- Invoice details will be dynamically generated here -->
+        </div>
+
+        <button onclick="window.location.href='products1.html'">Back to Products</button>
+    </div>
+
+    <script>
+        // Retrieve the selected products and total from localStorage
+        const selectedProducts = JSON.parse(localStorage.getItem('selectedProducts'));
+        const total = localStorage.getItem('total');
+
+        // Display the invoice
+        const invoiceDetails = document.getElementById('invoice-details');
+
+        // Check if products are available in localStorage
+        if (selectedProducts && selectedProducts.length > 0) {
+            let invoiceHTML = '<ul>';
+
+            // Loop through selected products and display them
+            selectedProducts.forEach(function(product) {
+                invoiceHTML += `<li>${product.name}: $${product.price.toFixed(2)}</li>`;
+            });
+
+            invoiceHTML += `</ul><h3>Total: $${parseFloat(total).toFixed(2)}</h3>`;
+            invoiceDetails.innerHTML = invoiceHTML;
+        } else {
+            invoiceDetails.innerHTML = '<p>No products selected.</p>';
+        }
+    </script>
+</body>
+</html>
